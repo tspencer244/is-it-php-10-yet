@@ -56,9 +56,21 @@ final class IsItPhp10YetTest extends TestCase
     /**
      * @return void
      */
-    public function testLessThanPhpTen()
+    public function testRequiresMoreMinerals()
     {
         $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("7.0.0"), new FunctionExistsProvider());
-        $this->assertEquals("This is not the PHP you are looking for", $phpTenYet->isItPhp10Yet());
+        $this->assertEquals("We require more minerals.", $phpTenYet->isItPhp10Yet());
+    }
+
+    public function testYearThreeThousandAndSeventeen()
+    {
+        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("11.0.0"), new FunctionExistsProvider());
+        $this->assertEquals("This is the year 3017.", $phpTenYet->isItPhp10Yet());
+    }
+
+    public function testNotThePhpVersionWeAreLookingFor()
+    {
+        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("-1.0.0"), new FunctionExistsProvider());
+        $this->assertEquals("This is not the PHP version you are looking for.", $phpTenYet->isItPhp10Yet());
     }
 }

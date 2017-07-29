@@ -89,6 +89,11 @@ final class IsItPhp10Yet
         return "We did it boys!";
     }
 
+    private function weRequireMoreMinerals(): string
+    {
+        return "We require more minerals.";
+    }
+
     /**
      * IsItPhp10Yet constructor.
      * @param PhpVersionProviderInterface $phpVersionProvider
@@ -119,23 +124,31 @@ final class IsItPhp10Yet
     {
         $major = (int)$this->getMajor();
 
+        if ($major >= 0 && $major < 10) {
+            return $this->weRequireMoreMinerals();
+        }
+
         if ($major === 10) {
             return $this->weDidItBoys();
+        }
+
+        if ($major > 10 && $major <= 9000) {
+            return $this->thisIsTheYearThreeThousandAndSeventeen();
         }
 
         if ($major > 9000) {
             return $this->itIsOverNineThousand();
         }
 
-        return $this->thisIsNotThePhpYouAreLookingFor();
+        return $this->thisIsNotThePhpVersionYouAreLookingFor();
     }
 
     /**
      * @return string
      */
-    public function thisIsNotThePhpYouAreLookingFor(): string
+    public function thisIsNotThePhpVersionYouAreLookingFor(): string
     {
-        return "This is not the PHP you are looking for";
+        return "This is not the PHP version you are looking for.";
     }
 
     /**
@@ -144,5 +157,10 @@ final class IsItPhp10Yet
     public function whatVersionIsThis(): string
     {
         return $this->getMajor() . "." . $this->getMinor() . "." . $this->getRelease();
+    }
+
+    private function thisIsTheYearThreeThousandAndSeventeen(): string
+    {
+        return "This is the year 3017.";
     }
 }
