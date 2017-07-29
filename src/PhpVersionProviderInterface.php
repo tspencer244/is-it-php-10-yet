@@ -10,5 +10,5 @@ namespace tspencer244\IsItPhp10Yet;
  */
 interface PhpVersionProviderInterface
 {
-    public function __invoke(): string;
+    public function __invoke(FunctionExistsProviderInterface $functionExistsProvider): string;
 }

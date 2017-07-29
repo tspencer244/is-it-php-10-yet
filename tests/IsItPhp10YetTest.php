@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace tspencer244\IsItPhp10Yet\Test;
 
 use PHPUnit\Framework\TestCase;
+use tspencer244\IsItPhp10Yet\FunctionExistsProvider;
+use tspencer244\IsItPhp10Yet\FunctionExistsProviderInterface;
 use tspencer244\IsItPhp10Yet\IsItPhp10Yet;
 use tspencer244\IsItPhp10Yet\PhpVersionProviderInterface;
 
@@ -21,7 +23,7 @@ final class PhpVersionProviderMock implements PhpVersionProviderInterface
         $this->phpVersion = $phpVersion;
     }
 
-    public function __invoke(): string
+    public function __invoke(FunctionExistsProviderInterface $functionExistsProvider): string
     {
         return $this->phpVersion;
     }
@@ -38,7 +40,7 @@ final class IsItPhp10YetTest extends TestCase
      */
     public function testPhpVersionOverNineThousand()
     {
-        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("9001.0.0"));
+        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("9001.0.0"), new FunctionExistsProvider());
         $this->assertEquals("It's over 9000!", $phpTenYet->isItPhp10Yet());
     }
 
@@ -47,7 +49,7 @@ final class IsItPhp10YetTest extends TestCase
      */
     public function testPhpVersionTen()
     {
-        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("10.0.0"));
+        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("10.0.0"), new FunctionExistsProvider());
         $this->assertEquals("We did it boys!", $phpTenYet->isItPhp10Yet());
     }
 
@@ -56,7 +58,7 @@ final class IsItPhp10YetTest extends TestCase
      */
     public function testLessThanPhpTen()
     {
-        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("7.0.0"));
+        $phpTenYet = new IsItPhp10Yet(new PhpVersionProviderMock("7.0.0"), new FunctionExistsProvider());
         $this->assertEquals("This is not the PHP you are looking for", $phpTenYet->isItPhp10Yet());
     }
 }

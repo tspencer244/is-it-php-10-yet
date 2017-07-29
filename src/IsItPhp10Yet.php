@@ -93,9 +93,9 @@ final class IsItPhp10Yet
      * IsItPhp10Yet constructor.
      * @param PhpVersionProviderInterface $phpVersionProvider
      */
-    public function __construct(PhpVersionProviderInterface $phpVersionProvider)
+    public function __construct(PhpVersionProviderInterface $phpVersionProvider, FunctionExistsProviderInterface $functionExistsProvider)
     {
-        $phpVersion = $phpVersionProvider();
+        $phpVersion = $phpVersionProvider($functionExistsProvider);
 
         list($major, $minor, $release) = explode(".", $phpVersion);
 

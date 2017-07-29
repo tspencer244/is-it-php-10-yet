@@ -8,9 +8,9 @@ use tspencer244\IsItPhp10Yet\Exception\HoustonWeHaveAProblemException;
 
 class PhpVersionProvider implements PhpVersionProviderInterface
 {
-    public function __invoke(): string
+    public function __invoke(FunctionExistsProviderInterface $functionExistsProvider): string
     {
-        if (function_exists("phpversion")) {
+        if ($functionExistsProvider("phpversion")) {
             return phpversion();
         }
 
