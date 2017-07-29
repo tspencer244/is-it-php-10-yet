@@ -1,0 +1,28 @@
+{
+  "name": "tspencer244/IsItPhp10Yet",
+  "description": "Tells you whether or not the current version of PHP has reached 10",
+  "minimum-stability": "stable",
+  "license": "Apache-2.0",
+  "authors": [
+    {
+      "name": "Thomas Spencer",
+      "email": "tomspencer244@gmail.com"
+    }
+  ],
+  "require": {
+    "php": "^7.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "tspencer244\\IsItPhp10Yet\\": "src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "tspencer244\\IsItPhp10Yet\\Tests\\": "tests"
+    }
+  }
+}
